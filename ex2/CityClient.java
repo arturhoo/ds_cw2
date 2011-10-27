@@ -36,9 +36,9 @@ public class CityClient {
 		        city.setMaxTemperature(maxTemp);
 
 		        // Report on new city details
-		        System.out.print("The city " + argv[0] + "has is now part of the country " + argv[1]);
-		        System.out.print(",and its minimum temperature was set to " + argv[2]);
-		        System.out.println(" and its maximun temperature to " + argv[3]);
+		        System.out.print("The city " + argv[0] + " is now part of the country " + argv[1]);
+		        System.out.print(", and its minimum temperature was set to " + argv[2]);
+		        System.out.println(" and its maximun temperature to " + argv[3] + ".");
 
 	      	}
 	      	else {

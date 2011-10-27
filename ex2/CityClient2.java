@@ -34,7 +34,7 @@ public class CityClient2 {
 		        double avgTemp = city.getAvgTemperature();
 
 		        // Report on new city details
-		        System.out.print("The city " + argv[0] + "is part of the country" + country);
+		        System.out.print("The city " + argv[0] + " is part of the country" + country);
 		        System.out.print(",its minimum temperature is " + minTemp);
 		        System.out.print(" and its maximun is " + maxTemp);
 		        System.out.println(" to an average of " + avgTemp);
