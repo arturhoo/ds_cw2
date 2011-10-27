@@ -24,7 +24,7 @@ public class CityClient {
 
 		        // Look up account object using RMI registry
 		        Registry registry = LocateRegistry.getRegistry(host);
-		        CityImpl city = (CityImpl)registry.lookup(argv[0]);
+		        City city = (City)registry.lookup(argv[0]);
 
 		        // Update city
 		        city.setCountry(argv[1]);
