@@ -12,7 +12,7 @@ import java.rmi.registry.Registry;
 public class CityClient {
 	public static void main(String[] argv) {
 		
-	    String host = "cslin-gps.leeds.ac.uk";
+	    String host = "cslin023.leeds.ac.uk";
 
 	    try {
 	    	if (argv.length > 1) {
