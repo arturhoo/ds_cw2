@@ -12,15 +12,15 @@ import java.rmi.registry.Registry;
 public class CityClient {
 	public static void main(String[] argv) {
 		
-		    String host = "cslin-gps.leeds.ac.uk";
+	    String host = "cslin-gps.leeds.ac.uk";
 
-		    try {
-		      if (argv.length > 1) {
+	    try {
+	    	if (argv.length > 1) {
 
 		        // Don't strictly need to install security manager unless
 		        // client will be downloading class files (e.g. stubs)
 		        // across the network
-		         System.setSecurityManager(new RMISecurityManager());
+		        System.setSecurityManager(new RMISecurityManager());
 
 		        // Look up account object using RMI registry
 		        Registry registry = LocateRegistry.getRegistry(host);
@@ -38,19 +38,16 @@ public class CityClient {
 		        System.out.print("And its minimum temperature is " + argv[2]);
 		        System.out.println("And its maximun temperature is " + argv[3]);
 
-		      }
-		      else {
-		        System.err.println(
-		         "usage: java [-Djava.security.policy=...] city country minTemp maxTemp");
-		        System.exit(1);
-		      }
-		    }
-		    catch (Exception error) {
-		      System.out.println(error);
-		      System.exit(1);
-		    }
-		  }
-
-		}
+	      	}
+	      	else {
+	        	System.err.println(
+	         		"usage: java [-Djava.security.policy=...] city country minTemp maxTemp");
+	        	System.exit(1);
+	      	}
+	    }
+	    catch (Exception error) {
+	    	System.out.println(error);
+	    	System.exit(1);
+	    }
 	}
 }
