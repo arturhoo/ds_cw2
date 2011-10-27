@@ -3,13 +3,13 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 /**
- * @(#)CityClient.java
+ * @(#)CityClient2.java
  * @author Artur Rodrigues
  * October 2011
  * Based on previous examples
  */
 
-public class CityClient {
+public class CityClient2 {
 	public static void main(String[] argv) {
 		
 	    String host = "cslin-gps.leeds.ac.uk";
@@ -26,24 +26,23 @@ public class CityClient {
 		        Registry registry = LocateRegistry.getRegistry(host);
 		        CityImpl city = (CityImpl)registry.lookup(argv[0]);
 
-		        // Update city
-		        city.setCountry(argv[1]);
+		        // Get the info
 
-		        // Update minTemp and maxTemp
-		        int minTemp = Integer.parseInt(argv[2]);
-		        int maxTemp = Integer.parseInt(argv[3]);
-		        city.setMinTemperature(minTemp);
-		        city.setMaxTemperature(maxTemp);
+		        String country = city.getCountry();
+		        int minTemp = city.getMinTemperature();
+		        int maxTemp = city.getMaxTemperature();
+		        double avgTemp = city.getAvgTemperature();
 
 		        // Report on new city details
-		        System.out.print("The city " + argv[0] + "has is now part of the country " + argv[1]);
-		        System.out.print(",and its minimum temperature was set to " + argv[2]);
-		        System.out.println(" and its maximun temperature to " + argv[3]);
+		        System.out.print("The city " + argv[0] + "is part of the country" + country);
+		        System.out.print(",its minimum temperature is " + minTemp);
+		        System.out.print(" and its maximun is " + maxTemp);
+		        System.out.println(" to an average of " + avgTemp);
 
 	      	}
 	      	else {
 	        	System.err.println(
-	         		"usage: java [-Djava.security.policy=...] city country minTemp maxTemp");
+	         		"usage: java [-Djava.security.policy=...] city");
 	        	System.exit(1);
 	      	}
 	    }
