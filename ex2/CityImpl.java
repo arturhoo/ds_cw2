@@ -43,7 +43,7 @@ public class CityImpl extends UnicastRemoteObject implements City {
       // return the City's average temperature
 
    public double getAvgTemperature() throws RemoteException {
-      double avgTemperature = (maxTemperature/minTemperature)/2;
+      double avgTemperature = (maxTemperature+minTemperature)/2;
       return avgTemperature;
    }
 

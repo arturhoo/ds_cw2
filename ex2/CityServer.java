@@ -1,5 +1,8 @@
 import java.rmi.*;
 import java.rmi.server.UnicastRemoteObject;
+import java.io.*;
+import java.sql.*;
+import java.util.*;
 
 /**
   * @author K. Djemame
@@ -7,6 +10,39 @@ import java.rmi.server.UnicastRemoteObject;
  */
 
 public class CityServer {
+
+  public static final String propsFile = "jdbc.properties";
+
+  /**
+   * Establishes a connection to the database.
+   *
+   * @return Connection object representing the connection
+   * @throws IOException if properties file cannot be accessed
+   * @throws SQLException if connection fails
+   */
+
+  public static Connection getConnection() throws IOException, SQLException
+  {
+    // Load properties
+    FileInputStream in = new FileInputStream(propsFile);
+    Properties props = new Properties();
+    props.load(in);
+
+    // Define JDBC driver
+    String drivers = props.getProperty("jdbc.drivers");
+    if (drivers != null)
+      System.setProperty("jdbc.drivers", drivers);
+      // Setting standard system property jdbc.drivers
+      // is an alternative to loading the driver manually
+      // by calling Class.forName()
+
+    // Obtain access parameters and use them to create connection
+    String url = props.getProperty("jdbc.url");
+    String user = props.getProperty("jdbc.user");
+    String password = props.getProperty("jdbc.password");
+
+    return DriverManager.getConnection(url, user, password);
+  }
 
   public static void main(String[] argv)
   {
@@ -24,6 +60,23 @@ public class CityServer {
         CityImpl city = new CityImpl(argv[0]);
 
         // Register the object with the local RMI registry
+
+        Connection connection = null;
+        try {
+          connection = getConnection();
+          Statement statement = connection.createStatement();
+          ResultSet results = statement.executeQuery(
+            "SELECT * FROM cities WHERE name ='" + argv[0] + "'");
+          while (results.next()) {
+            city.setCountry(results.getString("country"));
+            city.setMinTemperature(Integer.parseInt(results.getString("minTemperature")));
+            city.setMaxTemperature(Integer.parseInt(results.getString("maxTemperature")));
+          }
+          statement.close();
+        }
+        catch (Exception error) {
+          error.printStackTrace();
+        }
 
         Naming.rebind(argv[0], city);
         //     <---->
