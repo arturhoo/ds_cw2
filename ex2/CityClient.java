@@ -27,11 +27,13 @@ public class CityClient {
 		        CityImpl city = (CityImpl)registry.lookup(argv[0]);
 
 		        // Update city
-		        city.setCoutry(argv[1]);
+		        city.setCountry(argv[1]);
 
 		        // Update minTemp and maxTemp
-		        city.setMinTemperature(argv[2]);
-		        city.setMaxTemperature(argv[3]);
+		        int minTemp = Integer.parseInt(argv[2]);
+		        int maxTemp = Integer.parseInt(argv[3]);
+		        city.setMinTemperature(minTemp);
+		        city.setMaxTemperature(maxTemp);
 
 		        // Report on new city details
 		        System.out.print("The city " + argv[0] + "has is now part of the country" + argv[1]);
