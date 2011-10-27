@@ -56,11 +56,10 @@ public class CityServer {
         //System.setSecurityManager(new RMISecurityManager());
 
         // Make a City with the desired name
-
         CityImpl city = new CityImpl(argv[0]);
 
-        // Register the object with the local RMI registry
-
+        // Defines the connection and queries for the city the
+        // server was initiated with
         Connection connection = null;
         try {
           connection = getConnection();
@@ -78,11 +77,9 @@ public class CityServer {
           error.printStackTrace();
         }
 
+        // Register the object with the local RMI registry
         Naming.rebind(argv[0], city);
-        //     <---->
-        //     Can use bind instead if we are sure that
-        //     no other object is bound to this name
-
+       
         System.out.println(
          "Registered city " + argv[0] + "...");
 
