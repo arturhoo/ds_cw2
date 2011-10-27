@@ -15,7 +15,7 @@ public class CityClient2 {
 	    String host = "cslin023.leeds.ac.uk";
 
 	    try {
-	    	if (argv.length > 1) {
+	    	if (argv.length > 0) {
 
 		        // Don't strictly need to install security manager unless
 		        // client will be downloading class files (e.g. stubs)
@@ -34,7 +34,7 @@ public class CityClient2 {
 		        double avgTemp = city.getAvgTemperature();
 
 		        // Report on new city details
-		        System.out.print("The city " + argv[0] + " is part of the country" + country);
+		        System.out.print("The city " + argv[0] + " is part of the country " + country);
 		        System.out.print(",its minimum temperature is " + minTemp);
 		        System.out.print(" and its maximun is " + maxTemp);
 		        System.out.println(" to an average of " + avgTemp);
