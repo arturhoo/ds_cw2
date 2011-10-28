@@ -3,14 +3,15 @@ import java.rmi.server.UnicastRemoteObject;
 
 /**
  * @(#)CityImpl.java
- * @author Karim Djemame
- * October 2010
+ * @author Artur Rodrigues
+ * October 2011
+ * Based on previous examples
  */
 
 
 public class CityImpl extends UnicastRemoteObject implements City {
     private String name = "";         // city name
-    private String country = "";         // country name
+    private String country = "";      // country name
     private int minTemperature = 0;   // min. temperature
     private int maxTemperature = 0;   // max. temperature
 

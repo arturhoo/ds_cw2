@@ -5,8 +5,9 @@ import java.sql.*;
 import java.util.*;
 
 /**
-  * @author K. Djemame
-  * October 2010
+  * @author Artur Rodrigues
+  * October 2011
+  * Based on previous examples
  */
 
 public class CityServer {
@@ -47,52 +48,35 @@ public class CityServer {
   public static void main(String[] argv)
   {
     try {
-      if (argv.length > 0) {
+      // Could install a security manager by uncommenting line below,
+      // but this isn't really necessary unless our server is itself an
+      // RMI client of another server somewhere...
 
-        // Could install a security manager by uncommenting line below,
-        // but this isn't really necessary unless our server is itself an
-        // RMI client of another server somewhere...
+      //System.setSecurityManager(new RMISecurityManager());
 
-        //System.setSecurityManager(new RMISecurityManager());
 
-        // Make a City with the desired name
-        CityImpl city = new CityImpl(argv[0]);
-
-        // Defines the connection and queries for the city the
-        // server was initiated with
-        Connection connection = null;
-        try {
-          connection = getConnection();
-          Statement statement = connection.createStatement();
-          ResultSet results = statement.executeQuery(
-            "SELECT * FROM cities WHERE name ='" + argv[0] + "'");
-          while (results.next()) {
-            city.setCountry(results.getString("country"));
-            city.setMinTemperature(Integer.parseInt(results.getString("minTemperature")));
-            city.setMaxTemperature(Integer.parseInt(results.getString("maxTemperature")));
-          }
-          statement.close();
-        }
-        catch (Exception error) {
-          error.printStackTrace();
-        }
-
-        // Register the object with the local RMI registry
-        Naming.rebind(argv[0], city);
-       
-        System.out.println(
-         "Registered city " + argv[0] + "...");
-
-        // Server does not terminate here, despite there being
-        // no more code to execute; this is because creation of
-        // an CityImpl object starts another thread, to
-        // service remote invocations...
-
+      // Defines the connection and queries for the city the
+      // server was initiated with
+      Factory factory = null;
+      Connection connection = null;
+      try {
+        connection = getConnection();
+        factory = new FactoryImpl(connection);
       }
-      else {
-        System.err.println("usage: java CityServer cityName");
-        System.exit(1);
+      catch (Exception error) {
+        error.printStackTrace();
       }
+
+      // Register the object with the local RMI registry
+      Naming.rebind("Factory", factory);
+     
+      System.out.println(
+       "Registered factory...");
+
+      // Server does not terminate here, despite there being
+      // no more code to execute; this is because creation of
+      // an CityImpl object starts another thread, to
+      // service remote invocations...
     }
     catch (Exception error) {
       System.err.println(error);

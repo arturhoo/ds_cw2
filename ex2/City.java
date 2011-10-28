@@ -17,4 +17,3 @@ public interface City extends Remote {
    void setMinTemperature(int min) throws RemoteException;
    void setMaxTemperature(int max) throws RemoteException;
 }
-   

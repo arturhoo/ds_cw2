@@ -22,12 +22,12 @@ public class CityClient2 {
 		        // across the network
 		        System.setSecurityManager(new RMISecurityManager());
 
-		        // Look up account object using RMI registry
+		        // Look up factory object using RMI registry
 		        Registry registry = LocateRegistry.getRegistry(host);
-		        City city = (City)registry.lookup(argv[0]);
+		        Factory factory = (Factory)registry.lookup("Factory");
 
 		        // Get the info
-
+		        City city = (City)factory.getCity(argv[0]);
 		        String country = city.getCountry();
 		        int minTemp = city.getMinTemperature();
 		        int maxTemp = city.getMaxTemperature();
