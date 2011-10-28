@@ -10,3 +10,10 @@
 # End User Settings #
 #####################
 jdbc.properties
+
+
+# Misc #
+########
+.DS_Store
+q*.*/
+CW2_Artur_Rodrigues.zip

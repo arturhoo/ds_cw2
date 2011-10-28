@@ -1,0 +1,27 @@
+University of Leeds
+School of Computing
+3900 - Distributed Systems
+Coursework 2
+
+Artur Oliveira Rodrigues
+2011-10-28
+
+This package contains the source code for multiple exercises of Coursework 2.
+The code is pretty straightforward and print out in one single run all that was requested.
+
+To compile:
+
+	javac *.java
+
+To run the server:
+
+  rmiregistry &
+	java CityServer <follow on screen instructions for correct parameters>
+
+To run the client:
+
+  java CityClient[2] <follow on screen instructions for correct parameters>
+
+** PLEASE refer to documentation cw2_doc.pdf for correct usage of client. **
+
+Make sure to configure jdbc.properties when needed!
