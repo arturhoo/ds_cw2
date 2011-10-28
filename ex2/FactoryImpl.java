@@ -13,7 +13,10 @@ import java.util.*;
 
 
 public class FactoryImpl extends UnicastRemoteObject implements Factory {
+	// Stores an instance of connection. 
+	// Although not a sophisticated solution it works.
 	Connection connection = null;
+	
 	// Constructor
 	public FactoryImpl(Connection connection) throws RemoteException {
 		this.connection = connection;		
@@ -23,6 +26,7 @@ public class FactoryImpl extends UnicastRemoteObject implements Factory {
 	public CityImpl getCity(String name) throws RemoteException {
 		CityImpl city = new CityImpl(name);
 		try {
+			// Makes the statement
 		    Statement statement = this.connection.createStatement();
 		    ResultSet results = statement.executeQuery(
 		    	"SELECT * FROM cities WHERE name ='" + name + "'");
