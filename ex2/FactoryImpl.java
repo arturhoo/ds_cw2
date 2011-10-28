@@ -20,8 +20,8 @@ public class FactoryImpl extends UnicastRemoteObject implements Factory {
 	}
 
 	// Returns a city based on the name given
-	public CityImpl getCity(String name) throws RemoteException {
-		CityImpl city = new CityImpl(name);
+	public City getCity(String name) throws RemoteException {
+		City city = new CityImpl(name);
 		try {
 		    Statement statement = this.connection.createStatement();
 		    ResultSet results = statement.executeQuery(
