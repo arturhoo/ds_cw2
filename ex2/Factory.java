@@ -8,5 +8,5 @@ import java.util.List;
  */
 
 public interface Factory extends Remote {
-	CityImpl getCity(String name) throws RemoteException;
+	public City getCity(String name) throws RemoteException;
 }
